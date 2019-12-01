@@ -1,4 +1,4 @@
-import NA from "./node_modules/number-accuracy";
+import NA from "number-accuracy";
 
 export const kx = (k, x) => {
   if (k && (x || x === 0)) {
