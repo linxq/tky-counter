@@ -12,8 +12,23 @@ export default new Router({
     },
     {
       path: "/base",
-      name: "landing-page",
+      name: "base",
       component: require("@/pages/base/index").default
+    },
+    {
+      path: "/wheel",
+      name: "wheel",
+      component: require("@/pages/wheel/index").default
+    },
+    {
+      path: "/temperature",
+      name: "temperature",
+      component: require("@/pages/temperature/index").default
+    },
+    {
+      path: "/temperatureUp",
+      name: "temperatureUp",
+      component: require("@/pages/temperatureUp/index").default
     },
     {
       path: "*",
