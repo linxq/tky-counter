@@ -9,9 +9,7 @@
 <script>
 export default {
   name: "landing-page",
-  created() {
-    this.$router.push("/base");
-  },
+  created() {},
   methods: {
     open(link) {
       this.$electron.shell.openExternal(link);
