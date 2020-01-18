@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import SystemInformation from "./LandingPage/SystemInformation";
-
 export default {
   name: "landing-page",
-  components: { SystemInformation },
+  created() {
+    this.$router.push("/base");
+  },
   methods: {
     open(link) {
       this.$electron.shell.openExternal(link);
