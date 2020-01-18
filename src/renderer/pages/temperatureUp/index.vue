@@ -3,74 +3,138 @@
     <div slot="content">
       <el-breadcrumb separator="/" class="header"></el-breadcrumb>
       <el-form :model="form" label-width="140px">
-        <div v-for="(item, index) in form.wheelsData" :key="index" style="margin-bottom: 10px;">
-          <h4 style="float:left;">轮{{index+1}}</h4>
-          <span style="margin:0px 10px;">ΣP0μ:{{item["ΣP0μ"]}}</span>
-          <el-button class="display-button" type="text" @click="()=> onDisplay(item)">显隐</el-button>
-          <el-table :data="item.data" v-if="item.display" style="width: 100%">
-            <el-table-column label="名称" prop="key" width="80"></el-table-column>
-            <table-column label="I轮位" prop="w1"></table-column>
-            <table-column label="II轮位" prop="w2"></table-column>
-            <table-column label="III轮位" prop="w3"></table-column>
-            <table-column label="IV轮位" prop="w4"></table-column>
-          </el-table>
-        </div>
+        <el-row>
+          <h4>BZCKNG部分：</h4>
+          <col-item :span="12" label="f">
+            <el-input type="number" size="small" v-model="form.f">
+              <template slot="append">cm</template>
+            </el-input>
+          </col-item>
 
-        <col-item :span="12" label="maxΣP0μ">
-          <el-input :disabled="true" type="number" size="small" v-model="form.max">
-            <template slot="append">N·mm</template>
-          </el-input>
-        </col-item>
-        <h4>钢轨静弯矩：</h4>
-        <col-item :span="12" label="M0">
-          <el-input :disabled="true" type="number" size="small" v-model="form.m0">
-            <template slot="append">N·mm</template>
-          </el-input>
-        </col-item>
+          <col-item :span="12" label="Q0">
+            <el-input type="number" size="small" v-model="form.q0"></el-input>
+          </col-item>
+          <col-item :span="12" label="B">
+            <el-input type="number" size="small" v-model="form.b"></el-input>
+          </col-item>
+          <col-item :span="12" label="Z">
+            <el-input type="number" size="small" v-model="form.z"></el-input>
+          </col-item>
+          <col-item :span="12" label="C">
+            <el-input type="number" size="small" v-model="form.c"></el-input>
+          </col-item>
+          <col-item :span="12" label="K">
+            <el-input type="number" size="small" v-model="form.k"></el-input>
+          </col-item>
+          <col-item :span="12" label="N">
+            <el-input type="number" size="small" v-model="form.n"></el-input>
+          </col-item>
+          <col-item :span="12" label="G">
+            <el-input type="number" size="small" v-model="form.g"></el-input>
+          </col-item>
+          <col-item :span="12" label="BZCKNG结果">
+            <el-input
+              type="number"
+              size="small"
+              :disabled="true"
+              v-model="form.bzckng"
+            ></el-input>
+          </col-item>
+          <h4>Pmin部分：</h4>
 
-        <h4>钢轨动弯矩：</h4>
-        <col-item :span="12" label="速度系数α">
-          <el-input type="number" v-model="form.speedFactor" size="small">
-            <template slot="append">100km/h</template>
-          </el-input>
-        </col-item>
+          <input-select
+            :span="24"
+            label="曲线半径R"
+            v-model="form.cr"
+            unit="M"
+          ></input-select>
 
-        <col-item :span="12" label="横向水平力系数f">
-          <el-input type="number" v-model="form.f" size="small">
-            <template slot="append">500mm</template>
-          </el-input>
-        </col-item>
+          <col-item :span="12" label="d">
+            <el-input type="number" size="small" v-model="form.d"></el-input>
+          </col-item>
 
-        <col-item :span="12" label="偏载系数β">
-          <el-input type="number" v-model="form.biasFactor" size="small">
-            <template slot="append">90mm</template>
-          </el-input>
-        </col-item>
-        <col-item :span="12" label="综合动载系数">
-          <el-input :disabled="true" type="number" v-model="form.dynamicLoad" size="small">
-            <template slot="append">（1+a+b）</template>
-          </el-input>
-        </col-item>
+          <col-item :span="12" label="i0">
+            <el-input type="number" size="small" v-model="form.i0"></el-input>
+          </col-item>
 
-        <col-item :span="12" label="Md">
-          <el-input :disabled="true" type="number" v-model="form.md" size="small">
-            <template slot="append">N·mm</template>
-          </el-input>
-        </col-item>
-        <h4>轨底动弯应力：</h4>
-        <col-item :span="12" label="σ gd">
-          <el-input :disabled="true" type="number" v-model="form.gd" size="small">
-            <template slot="append">MPA</template>
-          </el-input>
-        </col-item>
+          <col-item :span="12" label="l0">
+            <el-input type="number" size="small" v-model="form.l0">
+              <template slot="append">cm</template>
+            </el-input>
+          </col-item>
+          <input-select
+            :span="24"
+            label="fk"
+            v-model="form.fk"
+            unit="m"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="等效阻力r"
+            v-model="form.r"
+            unit="N/cm"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="ΔTmin"
+            v-model="form.tmin"
+            unit="℃"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="纵向力分布"
+            v-model="form.longitudinalForceDistribution"
+            unit="℃"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="运营折减"
+            v-model="form.discount"
+            unit="℃"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="ΔTu"
+            v-model="form.tu"
+            unit="℃"
+          ></input-select>
+          <input-select
+            :span="24"
+            label="ΔTk"
+            v-model="form.tk"
+            unit="℃"
+          ></input-select>
+          <col-item :span="12" label="Pmin">
+            <el-input type="number" size="small" v-model="form.pmin">
+              <template slot="append">N</template>
+            </el-input>
+          </col-item>
+          <col-item :span="12" label="PKmin">
+            <el-input type="number" size="small" v-model="form.pkmin">
+              <template slot="append">N</template>
+            </el-input>
+          </col-item>
+        </el-row>
+        <el-row>
+          <el-col :span="14">
+            <el-button-group class="center">
+              <el-button @click="onClick">保存</el-button>
+              <el-button @click="sendCounter">计算</el-button>
+            </el-button-group>
+          </el-col>
+        </el-row>
       </el-form>
-      <el-row>
-        <el-col :span="14">
-          <el-button-group class="center">
-            <el-button @click="onClick">保存</el-button>
-          </el-button-group>
-        </el-col>
-      </el-row>
+      <div id="charts" style="height:300px;"></div>
+      <el-dialog
+        title="提示"
+        :visible.sync="centerDialogVisible"
+        width="80%"
+        center
+      >
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">取 消</el-button>
+        </span>
+      </el-dialog>
     </div>
   </Layout>
 </template>
@@ -80,28 +144,56 @@ import InputSelect from "@/components/InputSelect";
 import ColItem from "@/components/ColItem";
 import FormItem from "@/components/FormItem";
 import TableColumn from "@/components/TableColumn";
-import { kx, u, p0u, sum, m0, dynamicLoad, md, gd } from "./el";
+import { ipcRenderer } from "electron";
+import echarts from "echarts";
+
+import { bzckngEl, etaEl, phiEl, tiEl, tqEl, tmEl, t0El, pEl } from "./el";
 export default {
   components: {
     Layout,
     FormItem,
     TableColumn,
-    ColItem
+    ColItem,
+    InputSelect
   },
   data() {
     return {
       baseData: null,
       form: {
-        wheelsData: genWheelData(),
-        max: "",
-        m0: "",
-        speedFactor: "",
-        f: "",
-        biasFactor: "",
-        dynamicLoad: "",
-        md: "",
-        gd: ""
-      }
+        f: 0.02,
+        q0: "",
+        b: "",
+        z: "",
+        c: "",
+        k: "",
+        n: "",
+        g: "",
+        bzckng: "",
+        cr: "",
+        d: "",
+        i0: "",
+        l0: "",
+        fk: "",
+        r: "",
+        tmin: "",
+        longitudinalForceDistribution: "",
+        discount: "",
+        tu: "",
+        tk: "",
+        pmin: "",
+        pkmin: ""
+      },
+      eta: [],
+      phi: [],
+      ti: [],
+      tq: [],
+      tm: [],
+      t0: [],
+      p: [],
+      l: [],
+      lineSet: [],
+      myChart: null,
+      centerDialogVisible: false
     };
   },
   watch: {
@@ -113,11 +205,16 @@ export default {
     }
   },
   created() {
+    ipcRenderer.on("render:temperatureUp", this.reciver);
     this.getBase();
-    const wheelData = JSON.parse(window.localStorage.getItem("wheelData"));
-    if (wheelData) {
-      this.form = wheelData;
+    const up = JSON.parse(window.localStorage.getItem("up"));
+    if (up) {
+      this.form = up;
     }
+    this.l = createLValue();
+  },
+  mounted() {
+    this.myChart = echarts.init(document.getElementById("charts"));
   },
   beforeRouteEnter(to, from, next) {
     next();
@@ -135,77 +232,192 @@ export default {
       }
     },
     counter() {
-      const { k, w1 } = this.baseData;
-      const { wheelsData } = this.form;
-      wheelsData.map(this.wheelsDataCounter);
-      const max = this.max(wheelsData);
-      const m0Value = m0(max, k);
-      const dynamicLoadValue = dynamicLoad(this.form);
-      this.form.max = max;
-      this.form.m0 = m0Value;
-      this.form.dynamicLoad = dynamicLoadValue;
-      const mdValue = md(this.form);
-      this.form.md = mdValue;
-      const gdValue = gd(this.form, w1);
-      this.form.gd = gdValue;
+      setTimeout(item => {
+        const { f, d, i0, l0, bzckng, cr } = this.form;
+        this.form.pmin = this.oneTimeCounter(f, d, i0, l0, bzckng, cr);
+      }, 20);
     },
-    wheelsDataCounter(oneWheel) {
-      const { data } = oneWheel;
-      const one = data[0];
-      const two = data[1];
-      const three = data[2];
-      const four = data[3];
-      const five = data[4];
-      this.p0(one);
-      Object.entries(three).forEach(([key, value]) => {
-        if (key === "key") return;
-        const kxValue = kx(this.baseData.k, two[key]);
-        const uValue = u(kxValue);
-        three[key] = kxValue;
-        four[key] = uValue;
-        five[key] = p0u(one[key], uValue);
+    setInit() {
+      this.eta = [];
+      this.phi = [];
+      this.ti = [];
+      this.tq = [];
+      this.tm = [];
+      this.t0 = [];
+      this.p = [];
+    },
+    oneTimeCounter(f, d, i0, l0, bzckng, cr) {
+      const { l } = this;
+      this.form.bzckng = bzckngEl(this.form);
+      this.setInit();
+      l.map(item => {
+        const etaValue = etaEl(l0, item);
+        const phiValue = phiEl(l0, item, etaValue);
+        const tiValue = tiEl(this.baseData, f, d, i0, l0, phiValue, item);
+        const tqValue = tqEl(bzckng, item);
+        const tmValue = tmEl(item);
+        const t0Value = t0El(f, i0, cr, etaValue, item);
+        const pValue = pEl(tiValue, tqValue, tmValue, t0Value);
+        this.eta.push(etaValue);
+        this.phi.push(phiValue);
+        this.ti.push(tiValue);
+        this.tq.push(tqValue);
+        this.tm.push(tmValue);
+        this.t0.push(t0Value);
+        this.p.push(pValue);
       });
-      oneWheel["ΣP0μ"] = this.sum(five);
+
+      return Math.min(
+        ...this.p.map(item => {
+          return item ? item : 100000000;
+        })
+      ).toFixed(2);
     },
-    p0(one) {
-      const { w1, w2, w3, w4 } = one;
-      one.w1 = one.w2 = one.w3 = one.w4 = w1;
-    },
-    sum(five) {
-      return sum(five);
+    counterFIncrease() {
+      setTimeout(() => {
+        console.time();
+        const step = 0.01;
+        const start = 0;
+        const end = 3;
+        this.lineSet = new Array((end - start) / step + 1)
+          .fill(1)
+          .map((item, index) => {
+            const { d, i0, l0, bzckng, cr } = this.form;
+            const f = start + index * step;
+            return this.oneTimeCounter(f, d, i0, l0, bzckng, cr);
+          });
+        this.form.pkmin = Math.max(
+          ...this.lineSet.map(item => (item ? item : 0))
+        );
+        console.timeEnd();
+      }, 10);
     },
     onClick() {
-      window.localStorage.setItem("wheelData", JSON.stringify(this.form));
+      window.localStorage.setItem("up", JSON.stringify(this.form));
     },
-    max(wheelsData) {
-      const sumP0u = wheelsData.map(item => {
-        return item["ΣP0μ"] || 0;
+    sendCounter() {
+      const { eta, phi, ti, tq, tm, t0, p, l, form, baseData } = this;
+      const param = {
+        baseData,
+        form,
+        eta,
+        phi,
+        ti,
+        tq,
+        tm,
+        t0,
+        p,
+        l,
+        lineSet: null
+      };
+      ipcRenderer.send("main:temperatureUp", param);
+    },
+    reciver(event, result) {
+      // const xSet = new Array(15).fill(1).map((v, index) => {
+      //   return 0 + 0.2 * index;
+      // });
+      this.form.pkmin = result.form.pkmin;
+      this.myChart.setOption({
+        tooltip: {
+          formatter: (params, ticket, callback) => {
+            return result.xSet[params.dataIndex] + "：" + params.value;
+          }
+        },
+        toolbox: {
+          show: true,
+
+          feature: {
+            saveAsImage: {
+              show: true,
+
+              excludeComponents: ["toolbox"],
+
+              pixelRatio: 2
+            }
+          }
+        },
+
+        xAxis: {
+          type: "category",
+          data: result.xSet,
+          minInterval: 20,
+          maxInterval: 20,
+          interval: (index, value) => false,
+          axisLabel: {
+            interval: 19
+            // length: 15
+          }
+        },
+        yAxis: {
+          type: "value",
+          scale: true,
+          axisLabel: {
+            formatter: function(val) {
+              return `${val}(N)`;
+            }
+          }
+        },
+        // dataZoom: [
+        //   {
+        //     type: "inside",
+        //     start: 0,
+        //     end: 3
+        //   },
+        //   {
+        //     start: 0,
+        //     end: 3,
+        //     handleSize: "0",
+        //     handleStyle: {
+        //       color: "#fff",
+        //       shadowBlur: 3,
+        //       shadowColor: "rgba(0, 0, 0, 0.6)",
+        //       shadowOffsetX: 2,
+        //       shadowOffsetY: 2
+        //     }
+        //   }
+        // ],
+        series: [
+          {
+            data: result.lineSet,
+            type: "line",
+            smooth: true,
+            symbol: "none",
+            markPoint: {
+              data: [
+                // {
+                //   type: "max"
+                // },
+              ]
+            },
+            markLine: {
+              silent: true,
+              lineStyle: {
+                color: "#3A5FCD",
+                type: "solid"
+              },
+              data: [
+                {
+                  type: "max"
+                },
+                {
+                  xAxis: 0,
+                  yAxis: result.lineSet[2]
+                }
+              ]
+            }
+          }
+        ]
       });
-      return Math.max(...sumP0u);
     }
   }
 };
 
-function genWheelData() {
-  const array = [1, 2, 3];
-  return new Array(3).fill(1).map(item => {
-    const obj = genItem();
-    const one = {
-      display: true,
-      data: obj,
-      ΣP0μ: 0
-    };
-    return one;
-  });
-}
-function genItem() {
-  const baseKey = ["PO/N", "x/mm", "kx", "μ", "P0μ"];
-  const item = { w1: "", w2: "", w3: "", w4: "" };
-  return baseKey.map(key => {
-    return {
-      key,
-      ...item
-    };
+function createLValue() {
+  const base = 300;
+  const step = 10;
+  const max = 720;
+  return new Array((max - base) / step + 1).fill(1).map((time, index) => {
+    return index * step + base;
   });
 }
 </script>
@@ -216,7 +428,7 @@ function genItem() {
 }
 .center {
   display: block;
-  width: 50px;
+  width: 150px;
   margin: 0px auto;
 }
 </style>
