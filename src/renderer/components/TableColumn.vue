@@ -8,6 +8,7 @@
 <script>
 export default {
   name: "colItem",
+
   props: {
     label: {
       type: String,
@@ -34,5 +35,4 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>
