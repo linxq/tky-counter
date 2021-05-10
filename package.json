@@ -57,7 +57,7 @@
     "core-js": "^2.6.9",
     "echarts": "^4.6.0",
     "element-ui": "2.7.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "number-accuracy": "^1.0.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
